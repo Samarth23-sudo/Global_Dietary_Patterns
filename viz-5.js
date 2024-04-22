@@ -23,17 +23,18 @@ var m = [60, 0, 10, 0],
   excluded_groups = [];
 
 var colors = {
-  Asia: [185, 56, 73],
-  Africa: [37, 50, 75],
-  Europe: [325, 50, 39],
-  "North America": [10, 28, 67],
+  Asia: [0, 100, 40],
+  Africa: [153, 87, 40],
+  Europe: [54, 100, 40],
+  "North America": [307, 100, 50],
   "South America": [271, 39, 57],
-  Oceania: [56, 58, 73],
-  Unknown: [28, 100, 52],
+  Oceania: [183, 84, 45],
 };
 
 // Scale chart and canvas height
-d3.select("#chart").style("height", h + m[0] + m[2] + "px").style("margin-left","-200px");
+d3.select("#chart")
+  .style("height", h + m[0] + m[2] + "px")
+  .style("margin-left", "-200px");
 
 d3.selectAll("canvas")
   .attr("width", w)
@@ -70,7 +71,7 @@ d3.csv("viz-5.csv", function (raw_data) {
   // Convert quantitative scales to floats
   data = raw_data.map(function (d) {
     for (var k in d) {
-      if (!_.isNaN(raw_data[0][k] - 0) && k != "id") {
+      if (!_.isNaN(raw_data[0][k] - 0)) {
         d[k] = parseFloat(d[k]) || 0;
       }
     }
@@ -198,7 +199,6 @@ function data_table(sample) {
   // sort by first column
   var sample = sample.sort(function (a, b) {
     var col = d3.keys(a)[0];
-    console.log(col);
     return a[col] < b[col] ? -1 : 1;
   });
   var table = d3.select("#country-list").html("").selectAll(".row").data(sample).enter().append("div").on("mouseover", highlight).on("mouseout", unhighlight);
@@ -249,7 +249,6 @@ function path(d, ctx, color) {
 
 function color(d, a) {
   var c = colors[d];
-  console.log(c);
   // console.log("hsla(",Math.floor(Math.random()*300),",",c[1],"%,",c[2],"%,",a,")");
   return ["hsla(", c[0], ",", c[1], "%,", c[2], "%,", a, ")"].join("");
 }

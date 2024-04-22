@@ -26,7 +26,7 @@ function toggle() {
 
   svg.selectAll("*").remove();
   d3.select("#legend").selectAll("*").remove();
-  d3.select("#tooltip").selectAll("*").remove();
+  d3.select(".tooltip").selectAll("*").remove();
 
   d3.csv("viz-2.csv").then(function (data) {
     // Convert string data to numeric
@@ -71,11 +71,11 @@ function toggle() {
     svg
       .append("text")
       .attr("text-anchor", "end")
-      .attr("x", width - width / 3)
+      .attr("x", width - width / 5)
       .attr("y", height + margin.top)
-      .style("font-size", "30px") // Set font size
+      .style("font-size", "20px") // Set font size
       .text("Daily caloric intake per person from carbohydrates");
-    svg.selectAll(".tick text").style("font-size", "20px");
+    svg.selectAll(".tick text").style("font-size", "10px");
     // Add Y axis
     const y = d3
       .scaleLinear()
@@ -92,12 +92,12 @@ function toggle() {
       .append("text")
       .attr("text-anchor", "end")
       .attr("transform", "rotate(-90)")
-      .attr("y", -margin.left + margin.left / 2)
-      .attr("x", -6 * margin.top)
+      .attr("y", -margin.left + margin.left / 1.5)
+      .attr("x", -4 * margin.top)
       .attr("dy", "1em") // Adjust vertical position
-      .style("font-size", "30px") // Set font size
+      .style("font-size", "20px") // Set font size
       .text("Daily caloric intake per person from fat");
-    svg.selectAll(".tick text").style("font-size", "20px");
+    svg.selectAll(".tick text").style("font-size", "10px");
     // Add dots
     // Add dots with color based on Mean BMI (male)
     svg
@@ -120,7 +120,7 @@ function toggle() {
           .style("opacity", 1)
           .html(`Country: ${d.Entity}<br>Carbohydrates: ${d["Daily caloric intake per person from carbohydrates"]}<br>Fat: ${d["Daily caloric intake per person from fat"]}<br>Mean BMI(Male):${d[bmiColumn]}`)
           .style("left", event.pageX + "px")
-          .style("top", event.pageY - 28 + "px");
+          .style("top", event.pageY - height / 2 + "px");
       })
       .on("mouseleave", function (d) {
         tooltip.style("opacity", 0);
@@ -175,7 +175,29 @@ function toggle() {
       .text("Mean BMI (" + currentMode + ")");
     var legend = d3.legendColor().scale(colorScale).cells(5);
     // Add a tooltip div
-    const tooltip = d3.select("#tooltip").append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "white").style("border", "solid").style("border-width", "1px").style("border-radius", "5px").style("padding", "10px").style("font-size", "30px"); // Set font size
+    const tooltip = d3.select(".chart-container-2").append("div").attr("class", "tooltip").style("opacity", 0).style("background-color", "white").style("border", "solid").style("border-width", "1px").style("border-radius", "5px").style("padding", "10px").style("font-size", "15px"); // Set font size
+
+    // Mouseover event handler for the circles
+    svg
+      .selectAll("circle")
+      .on("mouseover", function (event, d) {
+        const tooltipWidth = parseFloat(tooltip.style("width").split("px")[0]);
+        const tooltipHeight = parseFloat(tooltip.style("height").split("px")[0]);
+        console.log(event.pageX - tooltipWidth / 2, event.pageY - tooltipHeight - 20);
+        tooltip
+          .style("opacity", 1)
+          .html(
+            `Country: ${d.Entity}<br>
+        Carbohydrates: ${d["Daily caloric intake per person from carbohydrates"]}<br>
+        Fat: ${d["Daily caloric intake per person from fat"]}<br>
+        Mean BMI(Male): ${d["Mean BMI (male)"]}`
+          )
+          .style("left", event.pageX - tooltipWidth / 2 + "px") // Position tooltip at the center of mouse
+          .style("top", event.pageY - height / 1.6 + "px"); // Position above the mouse
+      })
+      .on("mouseout", function () {
+        tooltip.style("opacity", 0); // Hide tooltip on mouseout
+      });
     // Append legend to the legend container
     legendContainer.append("g").attr("class", "legend").attr("transform", "translate(0, 50)").call(legend);
   });
@@ -215,11 +237,11 @@ d3.csv("combined_data.csv").then(function (data) {
   svg
     .append("text")
     .attr("text-anchor", "end")
-    .attr("x", width - width / 3)
+    .attr("x", width - width / 5)
     .attr("y", height + margin.top)
-    .style("font-size", "30px") // Set font size
+    .style("font-size", "20px") // Set font size
     .text("Daily caloric intake per person from carbohydrates");
-  svg.selectAll(".tick text").style("font-size", "20px");
+  svg.selectAll(".tick text").style("font-size", "10px");
   // Add Y axis
   const y = d3
     .scaleLinear()
@@ -236,12 +258,12 @@ d3.csv("combined_data.csv").then(function (data) {
     .append("text")
     .attr("text-anchor", "end")
     .attr("transform", "rotate(-90)")
-    .attr("y", -margin.left + margin.left / 2)
-    .attr("x", -6 * margin.top)
+    .attr("y", -margin.left + margin.left / 1.5)
+    .attr("x", -4 * margin.top)
     .attr("dy", "1em") // Adjust vertical position
-    .style("font-size", "30px") // Set font size
+    .style("font-size", "20px") // Set font size
     .text("Daily caloric intake per person from fat");
-  svg.selectAll(".tick text").style("font-size", "20px");
+  svg.selectAll(".tick text").style("font-size", "10px");
   // Add dots
   // Add dots with color based on Mean BMI (male)
   svg
@@ -319,7 +341,28 @@ d3.csv("combined_data.csv").then(function (data) {
     .text("Mean BMI (male)");
   var legend = d3.legendColor().scale(colorScale).cells(5);
   // Add a tooltip div
-  const tooltip = d3.select("#tooltip").append("div").style("opacity", 0).attr("class", "tooltip").style("background-color", "white").style("border", "solid").style("border-width", "1px").style("border-radius", "5px").style("padding", "10px").style("font-size", "30px"); // Set font size
+  const tooltip = d3.select("#tooltip").style("opacity", 0).style("background-color", "white").style("border", "solid").style("border-width", "1px").style("border-radius", "5px").style("padding", "10px").style("font-size", "15px"); // Set font size
+
+  // Mouseover event handler for the circles
+  svg
+    .selectAll("circle")
+    .on("mouseover", function (event, d) {
+      const tooltipWidth = parseFloat(tooltip.style("width").split("px")[0]);
+      const tooltipHeight = parseFloat(tooltip.style("height").split("px")[0]);
+      tooltip
+        .style("opacity", 1)
+        .html(
+          `Country: ${d.Entity}<br>
+        Carbohydrates: ${d["Daily caloric intake per person from carbohydrates"]}<br>
+        Fat: ${d["Daily caloric intake per person from fat"]}<br>
+        Mean BMI(Male): ${d["Mean BMI (male)"]}`
+        )
+        .style("left", event.pageX - 1000 - tooltipWidth / 2 + "px") // Position tooltip at the center of mouse
+        .style("top", event.pageY - tooltipHeight - 20 + "px"); // Position above the mouse
+    })
+    .on("mouseout", function () {
+      tooltip.style("opacity", 0); // Hide tooltip on mouseout
+    });
   // Append legend to the legend container
   legendContainer.append("g").attr("class", "legend").attr("transform", "translate(0, 50)").call(legend);
 });

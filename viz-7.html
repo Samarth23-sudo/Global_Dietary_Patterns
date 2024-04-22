@@ -169,7 +169,7 @@
     <div class="wrap-body">
       <header>
         <div class="wrap-header">
-          <div class="main-header" style="background-image: url(images/hero.jpg)">
+          <div class="main-header" style="background-image: url(./images/dark-world-decorative-image.png)">
             <div class="bg-overlay">
               <div class="hero-content-wrapper">
                 <div class="hero-content">
@@ -303,9 +303,6 @@
                         return "translate(" + d.x * 0.65 + "," + d.y * 0.65 + ")";
                       });
             
-                    node.append("title").text(function (d) {
-                      return d.data.Country + ": " + d.data["Overweight Value"];
-                    });
             
                     var tooltip = d3.select(".sparsh-1").append("div").attr("class", "tooltip");
                     node
@@ -329,7 +326,7 @@
                         tooltip
                           .style("opacity", 1) // Show the tooltip
                           .html(
-                            `<div class="country-and-year"><span class="country" style="color: ${color}"><b>${d.data.Country}</b><br></span><span class="year"> has ${d.data["Overweight Value"]} percent of its population as overweight</span></div>`
+                            `<div class="country-and-year"><span class="country" style="color: ${color}"><b>${d.data.Country}</b><br></span><span class="year"> has <b style="color:black">${d.data["Overweight Value"]}</b> percent of its population as overweight</span></div>`
                           )
                           .style("left", event.pageX + 10 + "px") // Position the tooltip
                           .style("top", event.pageY - (window.innerHeight/2) + "px");
@@ -494,25 +491,49 @@
                   // Adjust the debounce wait time (in milliseconds) as needed
                 </script>
                 <div class="entry-content" id="interactions">
-                  <div class="excerpt"><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum exercitation ullamco laboris nisi ut aliquip.</p></div>
-                  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
-                  <blockquote><p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet vultatup duista.</p></blockquote>
-                  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril.</p>
-                  <h2>Heading 1</h2>
-                  <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse lorem ipsum dolor sit amet.</p>
-                  <h2>Heading 2</h2>
-                  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. At vero eos et accusam et justo.</p>
-                  <p><code>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</code></p>
-                  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                  <div class="note">
-                    <ol>
-                      <li>Lorem ipsum</li>
-                      <li>Sit amet vultatup nonumy</li>
-                      <li>Duista sed diam</li>
-                    </ol>
-                    <div class="clear"></div>
-                  </div>
-                  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                  <h1>Breakdown of Scatter Plot Visualization</h1>
+                  <br>
+                  <h2>Data Points:</h2>
+                  <ul>
+                      <li>The graph displays data points represented by bubbles positioned at various locations on the plot.</li>
+                      <li>Each bubble likely represents a country.</li>
+                  </ul>
+                  
+                  <h2>Axes:</h2>
+                  <ul>
+                      <li>The horizontal axis (X-axis) most likely encodes "Daily Calorie Intake from Fat" based on the label in the image.</li>
+                      <li>The vertical axis (Y-axis) likely represents "Daily Calorie Intake from Carbohydrates."</li>
+                  </ul>
+                  
+                  <h2>Color:</h2>
+                  <ul>
+                      <li>Each continent is represented by a distinct color, allowing for easy visual distinction between regions.</li>
+                      <li>For example, blue for North America, green for South America, etc.</li>
+                  </ul>
+                  
+                  <h2>Bubble Size:</h2>
+                  <ul>
+                      <li>The radius of the bubble seems to be proportional to the "Overweight Percentage" for the country it represents.</li>
+                      <li>Larger bubbles likely correspond to higher overweight rates.</li>
+                  </ul>
+                  
+                  <h2>Slider:</h2>
+                  <ul>
+                      <li>A slider is present at the bottom of the visualization, likely allowing users to select a specific "Overweight Rate" threshold.</li>
+                      <li>This enables filtering the data points.</li>
+                  </ul>
+                  
+                  <h2>Tooltip (possible):</h2>
+                  <ul>
+                      <li>While not explicitly mentioned, the prompt describes a tooltip functionality that might appear when hovering over a data point.</li>
+                      <li>The tooltip would reveal additional information like country name, specific values for caloric intake, and overweight rate.</li>
+                  </ul>
+                  
+                  <h2>Possible Interactions:</h2>
+                  <ul>
+                      <li><strong>Filtering by Overweight Rate:</strong> The slider allows users to dynamically filter the data points based on a chosen "Overweight Rate" threshold. This helps focus on countries with overweight rates exceeding a specific value.</li>
+                      <li><strong>Hovering for Tooltips (possible):</strong> If a tooltip feature exists, hovering over a data point might reveal additional context, such as the country name, its specific values for daily caloric intake from fat and carbohydrates, and its overweight rate percentage.</li>
+                  </ul>
                 </div>
               </div>
             </article>

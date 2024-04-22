@@ -54,7 +54,7 @@
     <div class="wrap-body">
       <header>
         <div class="wrap-header">
-          <div class="main-header" style="background-image: url(images/hero.jpg)">
+          <div class="main-header" style="background-image: url(images/dark-world-decorative-image.png)">
             <div class="bg-overlay">
               <div class="hero-content-wrapper">
                 <div class="hero-content">
@@ -292,22 +292,33 @@
                           // Hide tooltip on mouseout
                           tooltip.style("opacity", 0);
                         });
-                      // Draw X axis with rotated labels
-                      svg
-                        .append("g")
-                        .attr("transform", `translate(0,${height})`)
-                        .call(d3.axisBottom(xScale))
-                        .selectAll("text")
-                        .attr("transform", "rotate(-90)") // Rotate labels by -45 degrees
-                        .style("text-anchor", "end") // Adjust text anchor
-                        .attr("dx", "-.8em") // Adjust x position
-                        .attr("dy", ".15em"); // Adjust y position
-              
-                      // Remove existing y-axis
-                      svg.select(".y-axis").remove();
-              
-                      // Draw updated Y axis
-                      svg.append("g").attr("class", "y-axis").call(d3.axisLeft(yScale));
+// Draw X axis with rotated labels
+svg
+  .append("g")
+  .attr("transform", `translate(0,${height})`)
+  .call(d3.axisBottom(xScale))
+  .selectAll("text")
+  .attr("transform", "rotate(-90)") // Rotate labels by -90 degrees
+  .style("text-anchor", "end") // Adjust text anchor
+  .attr("dx", "-.8em") // Adjust x position
+  .attr("dy", ".15em") // Adjust y position
+
+// Remove existing y-axis
+svg.select(".y-axis").remove();
+
+// Draw updated Y axis with label
+svg.append("g")
+  .attr("class", "y-axis")
+  .call(d3.axisLeft(yScale));
+
+// Add Y axis label
+svg.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left)
+  .attr("x", 0 - (height / 2))
+  .attr("dy", "1em")
+  .style("text-anchor", "middle")
+  .text("GDP per capita"); // Y axis label
               
                       // Draw legend
                       const legend = svg
@@ -357,25 +368,24 @@
                   </script>
                 </div>
                 <div class="entry-content" id="interactions">
-                  <div class="excerpt"><p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum exercitation ullamco laboris nisi ut aliquip.</p></div>
-                  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
-                  <blockquote><p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet vultatup duista.</p></blockquote>
-                  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril.</p>
-                  <h2>Heading 1</h2>
-                  <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse lorem ipsum dolor sit amet.</p>
-                  <h2>Heading 2</h2>
-                  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. At vero eos et accusam et justo.</p>
-                  <p><code>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</code></p>
-                  <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                  <div class="note">
-                    <ol>
-                      <li>Lorem ipsum</li>
-                      <li>Sit amet vultatup nonumy</li>
-                      <li>Duista sed diam</li>
-                    </ol>
-                    <div class="clear"></div>
-                  </div>
-                  <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                  <h1>Unveiling Nutrient Intake: A Multi-Layered Look at Dietary Habits</h1>
+    
+                  <p>This chart appears to be a complex visualization, possibly a combination of stacked bars and a line graph, depicting the average daily intake of various nutrients across different income levels. Let's delve into the potential elements:</p>
+                  
+                  <h2>Key Elements:</h2>
+                  <ul>
+                      <li><strong>Multi-Layered Data:</strong> The visualization likely uses stacked bars to represent total intake (y-axis) of different nutrient categories (e.g., protein, carbs, minerals, vitamins) for each income level (x-axis). Each layer (segment) of a bar might represent a specific nutrient group.</li>
+                      <li><strong>Color Coding:</strong> Distinct colors would differentiate the nutrient categories, making it easier to identify trends for each.</li>
+                      <li><strong>Line Graph (possible):</strong> There might be a line graph superimposed on the stacked bars, representing a specific nutrient (like vitamins or minerals) for a clearer visualization of its intake across income levels.</li>
+                  </ul>
+                  
+                  <h2>Possible Interactions (if applicable):</h2>
+                  <ul>
+                      <li><strong>Bar Hover (possible):</strong> Hovering over a specific segment of a stacked bar could reveal a tooltip with details like the exact amount consumed for that particular nutrient and income level.</li>
+                      <li><strong>Line Interaction (possible):</strong> The line graph, if interactive, might allow users to highlight a specific income level and see the corresponding intake values for all nutrients depicted in the stacked bars.</li>
+                  </ul>
+              
+                  <p>This intricate visualization allows for a comprehensive comparison of dietary patterns across income groups. By combining stacked bars and a line graph (if applicable), it offers insights into the intake variations for multiple nutrients based on income levels. This can be helpful for public health officials and nutritionists to identify potential areas for dietary interventions or educational programs.</p>
                 </div>
               </div>
             </article>
